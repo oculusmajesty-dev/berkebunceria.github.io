@@ -1,0 +1,1181 @@
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  font-family:'Fredoka', sans-serif;
+  background:linear-gradient(to bottom,#dff7c8,#bde89b);
+  min-height:100vh;
+  overflow-x:hidden;
+  color:#2b2b2b;
+}
+
+/* ================================= */
+/* CONTAINER */
+/* ================================= */
+
+.container{
+  max-width:1200px;
+  margin:auto;
+  padding:20px;
+}
+
+/* ================================= */
+/* PAGE */
+/* ================================= */
+
+.page{
+  display:none;
+  animation:fade .5s ease;
+}
+
+.page.active{
+  display:block;
+}
+
+@keyframes fade{
+
+  from{
+    opacity:0;
+    transform:translateY(20px);
+  }
+
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+
+}
+
+/* ================================= */
+/* HERO */
+/* ================================= */
+
+.hero-box{
+  position:relative;
+  background:linear-gradient(to bottom,#ecffd9,#caf4ab);
+  border-radius:40px;
+  padding:50px 20px;
+  text-align:center;
+  overflow:hidden;
+  box-shadow:0 10px 30px rgba(0,0,0,.1);
+}
+
+.hero-box h1{
+  font-size:65px;
+  color:#2e7d32;
+  margin-bottom:20px;
+}
+
+.hero-circle{
+  width:320px;
+  height:320px;
+  border-radius:50%;
+  background:white;
+  margin:auto;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  box-shadow:0 10px 20px rgba(0,0,0,.1);
+}
+
+.hero-img{
+  width:220px;
+  animation:bounce 2s infinite;
+}
+
+@keyframes bounce{
+
+  0%,100%{
+    transform:translateY(0);
+  }
+
+  50%{
+    transform:translateY(-10px);
+  }
+
+}
+
+.welcome-text{
+  font-size:42px;
+  margin-top:25px;
+  color:#2e7d32;
+}
+
+.hero-desc{
+  margin-top:20px;
+  font-size:28px;
+  line-height:1.6;
+}
+
+/* ================================= */
+/* FLOATING ICON */
+/* ================================= */
+
+.floating{
+  position:absolute;
+  font-size:60px;
+  animation:floating 3s ease-in-out infinite;
+}
+
+.floating1{
+  top:50px;
+  left:70px;
+}
+
+.floating2{
+  top:100px;
+  right:80px;
+}
+
+.floating3{
+  bottom:80px;
+  left:100px;
+}
+
+.floating4{
+  bottom:80px;
+  right:100px;
+}
+
+@keyframes floating{
+
+  0%{
+    transform:translateY(0);
+  }
+
+  50%{
+    transform:translateY(-15px);
+  }
+
+  100%{
+    transform:translateY(0);
+  }
+
+}
+
+/* ================================= */
+/* BUTTON */
+/* ================================= */
+
+button{
+  border:none;
+  outline:none;
+  cursor:pointer;
+  font-family:'Fredoka', sans-serif;
+  transition:.3s;
+}
+
+.start-btn{
+  margin-top:35px;
+  background:linear-gradient(to right,#66bb6a,#43a047);
+  color:white;
+  padding:18px 40px;
+  border-radius:25px;
+  font-size:30px;
+  animation:pulse 1.5s infinite;
+  box-shadow:0 8px 18px rgba(0,0,0,.15);
+}
+
+.start-btn:hover{
+  transform:scale(1.05);
+}
+
+@keyframes pulse{
+
+  0%{
+    transform:scale(1);
+  }
+
+  50%{
+    transform:scale(1.05);
+  }
+
+  100%{
+    transform:scale(1);
+  }
+
+}
+
+/* ================================= */
+/* GAME TITLE */
+/* ================================= */
+
+h2{
+  text-align:center;
+  font-size:52px;
+  color:#2e7d32;
+  margin:20px 0;
+}
+
+.game-info{
+  text-align:center;
+  font-size:28px;
+  margin-bottom:30px;
+}
+
+/* ================================= */
+/* GAME CARD */
+/* ================================= */
+
+.game-card{
+  max-width:700px;
+  margin:auto;
+  background:white;
+  border-radius:30px;
+  padding:30px;
+  text-align:center;
+  box-shadow:0 10px 20px rgba(0,0,0,.1);
+}
+
+.game-image{
+  width:250px;
+  margin-bottom:20px;
+}
+
+#colorQuestion{
+  font-size:38px;
+  margin-bottom:20px;
+}
+
+/* ================================= */
+/* CHOICES */
+/* ================================= */
+
+.choices{
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:20px;
+}
+
+.choices button{
+  background:#66bb6a;
+  color:white;
+  padding:18px 28px;
+  border-radius:20px;
+  font-size:26px;
+}
+
+.choices button:hover{
+  background:#43a047;
+  transform:scale(1.05);
+}
+
+/* ================================= */
+/* FEEDBACK */
+/* ================================= */
+
+.feedback{
+  margin-top:25px;
+  text-align:center;
+  font-size:32px;
+  font-weight:bold;
+}
+
+/* ================================= */
+/* SCORE */
+/* ================================= */
+
+.score-box{
+  margin-top:25px;
+  text-align:center;
+  font-size:36px;
+  font-weight:bold;
+}
+
+/* ================================= */
+/* GAME 2 */
+/* ================================= */
+
+.match-wrapper{
+  position:relative;
+  max-width:900px;
+  margin:auto;
+}
+
+.match-game{
+  position:relative;
+  z-index:2;
+}
+
+.match-row{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+
+  margin-bottom:50px;
+}
+
+.left-item,
+.right-item{
+  display:flex;
+  align-items:center;
+  gap:25px;
+}
+
+.fruit-img,
+.shadow-img{
+  width:150px;
+}
+
+.shadow-img{
+  filter:brightness(0);
+}
+
+/* ================================= */
+/* TITIK */
+/* ================================= */
+
+.dot{
+  width:38px;
+  height:38px;
+
+  border-radius:50%;
+
+  background:#777;
+
+  cursor:pointer;
+
+  transition:.3s;
+
+  position:relative;
+
+  z-index:5;
+}
+
+.dot:hover{
+  transform:scale(1.15);
+}
+
+.dot.active-dot{
+  background:#43a047;
+
+  box-shadow:
+    0 0 15px #43a047;
+}
+
+/* BENAR */
+.dot.correct-dot{
+  background:#4caf50;
+}
+
+/* SALAH */
+.dot.wrong-dot{
+  background:#f44336;
+}
+
+/* ================================= */
+/* GARIS */
+/* ================================= */
+
+.match-line{
+  position:absolute;
+
+  height:6px;
+
+  background:#4caf50;
+
+  border-radius:20px;
+
+  transform-origin:left center;
+
+  z-index:1;
+
+  animation:lineShow .3s ease;
+}
+
+@keyframes lineShow{
+
+  from{
+    width:0;
+    opacity:0;
+  }
+
+  to{
+    opacity:1;
+  }
+
+}
+
+/* ================================= */
+/* GAME 3 */
+/* ================================= */
+
+#game3{
+  text-align:center;
+}
+
+.memory-grid{
+  display:grid;
+  grid-template-columns:repeat(4,140px);
+  gap:25px;
+  justify-content:center;
+  width:fit-content;
+  margin:40px auto;
+}
+
+.memory-card{
+  width:140px;
+  height:140px;
+  background:white;
+  border-radius:25px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:65px;
+  cursor:pointer;
+  transition:.3s;
+  box-shadow:0 10px 20px rgba(0,0,0,.1);
+}
+
+.memory-card:hover{
+  transform:scale(1.05);
+}
+
+/* ================================= */
+/* GAME 4 NEW GARDEN */
+/* ================================= */
+
+.garden-game{
+  margin-top:40px;
+
+  display:flex;
+  flex-direction:column;
+
+  align-items:center;
+
+  gap:35px;
+}
+
+/* ================================= */
+/* KEBUN */
+/* ================================= */
+
+.garden-area{
+  width:100%;
+  max-width:950px;
+  height:650px;
+
+  border-radius:40px;
+
+  overflow:hidden;
+
+  position:relative;
+
+  background:
+    linear-gradient(
+      to bottom,
+      #8fd0ff 0%,
+      #bdefff 60%,
+      #93d94d 60%,
+      #63bb05 100%
+    );
+
+  box-shadow:
+    0 15px 35px rgba(0,0,0,.15);
+}
+
+/* ================================= */
+/* LANGIT */
+/* ================================= */
+
+.sky{
+  width:100%;
+  height:60%;
+  position:relative;
+}
+
+.cloud{
+  position:absolute;
+  background:#f5f5f5;
+  border-radius:100px;
+}
+
+.cloud::before,
+.cloud::after{
+  content:'';
+  position:absolute;
+  background:#f5f5f5;
+  border-radius:50%;
+}
+
+.cloud1{
+  width:140px;
+  height:70px;
+
+  top:60px;
+  left:90px;
+}
+
+.cloud1::before{
+  width:70px;
+  height:70px;
+
+  left:15px;
+  top:-35px;
+}
+
+.cloud1::after{
+  width:80px;
+  height:80px;
+
+  right:15px;
+  top:-40px;
+}
+
+.cloud2{
+  width:150px;
+  height:75px;
+
+  top:140px;
+  right:90px;
+}
+
+.cloud2::before{
+  width:80px;
+  height:80px;
+
+  left:20px;
+  top:-35px;
+}
+
+.cloud2::after{
+  width:85px;
+  height:85px;
+
+  right:15px;
+  top:-40px;
+}
+
+/* ================================= */
+/* RUMPUT */
+/* ================================= */
+
+.grass{
+  position:absolute;
+
+  bottom:0;
+
+  width:100%;
+  height:40%;
+
+  background:
+    linear-gradient(
+      to bottom,
+      #93d94d,
+      #63bb05
+    );
+}
+
+/* ================================= */
+/* AREA TANAM */
+/* ================================= */
+
+.farm-zone{
+  position:absolute;
+
+  bottom:90px;
+  left:50%;
+
+  transform:translateX(-50%);
+
+  width:500px;
+  height:240px;
+
+  display:flex;
+  align-items:flex-end;
+  justify-content:center;
+}
+
+/* ================================= */
+/* TANAH */
+/* ================================= */
+
+.soil{
+  width:420px;
+  height:120px;
+
+  background:
+    linear-gradient(
+      to bottom,
+      #8b572a,
+      #6b3d18
+    );
+
+  border-radius:50%;
+
+  position:absolute;
+
+  bottom:0;
+
+  animation:soilShow .6s ease;
+
+  z-index:2;
+}
+
+@keyframes soilShow{
+
+  from{
+    transform:scale(.5);
+    opacity:0;
+  }
+
+  to{
+    transform:scale(1);
+    opacity:1;
+  }
+
+}
+
+.hidden{
+  display:none !important;
+}
+
+/* ================================= */
+/* POPUP PILIH BIBIT */
+/* ================================= */
+
+.seed-options{
+  position:absolute;
+
+  top:0;
+  left:0;
+
+  width:100%;
+  height:100%;
+
+  background:rgba(0,0,0,.45);
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  z-index:999;
+}
+
+/* BOX POPUP */
+.seed-popup{
+  background:white;
+
+  width:90%;
+  max-width:600px;
+
+  padding:40px;
+
+  border-radius:35px;
+
+  text-align:center;
+
+  animation:popupShow .5s ease;
+
+  box-shadow:
+    0 15px 35px rgba(0,0,0,.2);
+}
+
+/* TITLE */
+.seed-popup h2{
+  font-size:38px;
+  color:#2e7d32;
+
+  margin-bottom:30px;
+}
+
+/* LIST PILIHAN */
+.seed-list{
+  display:flex;
+  justify-content:center;
+  gap:20px;
+  flex-wrap:wrap;
+}
+
+/* CARD BIBIT */
+.seed-choice{
+  background:#f7fff1;
+
+  border:none;
+
+  width:140px;
+  height:140px;
+
+  border-radius:30px;
+
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+
+  gap:10px;
+
+  cursor:pointer;
+
+  transition:.3s;
+
+  font-family:'Fredoka', sans-serif;
+
+  box-shadow:
+    0 10px 20px rgba(0,0,0,.08);
+}
+
+.seed-choice:hover{
+  transform:
+    translateY(-8px)
+    scale(1.05);
+
+  background:#e8ffd8;
+}
+
+/* ICON */
+.seed-icon{
+  font-size:55px;
+}
+
+/* TEXT */
+.seed-name{
+  font-size:22px;
+  color:#2e7d32;
+}
+
+.tanam-info{
+  margin-top:15px;
+  font-size:18px;
+  color:#666;
+  line-height:1.5;
+}
+
+/* ================================= */
+/* BIJI */
+/* ================================= */
+
+.seed-area{
+  position:absolute;
+
+  bottom:38px;
+
+  width:260px;
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+
+  z-index:3;
+
+  font-size:42px;
+
+  animation:seedPlant .9s ease;
+}
+
+/* BIJI BERJAJAR */
+.seed-row{
+  display:flex;
+  gap:35px;
+}
+
+/* BIJI MASUK TANAH */
+.seed-row{
+  transform:translateY(18px);
+}
+
+@keyframes seedPlant{
+
+  0%{
+    transform:
+      translateY(-120px)
+      scale(.4);
+
+    opacity:0;
+  }
+
+  70%{
+    transform:
+      translateY(15px)
+      scale(1.05);
+  }
+
+  100%{
+    transform:
+      translateY(0)
+      scale(1);
+
+    opacity:1;
+  }
+
+}
+
+/* ================================= */
+/* AIR */
+/* ================================= */
+
+.water-effect{
+  position:absolute;
+
+  top:20px;
+
+  font-size:50px;
+
+  z-index:20;
+
+  animation:watering 1s infinite;
+}
+
+@keyframes watering{
+
+  0%{
+    transform:translateY(0);
+  }
+
+  50%{
+    transform:translateY(12px);
+  }
+
+  100%{
+    transform:translateY(0);
+  }
+
+}
+
+/* ================================= */
+/* TANAMAN */
+/* ================================= */
+
+.plant{
+  position:absolute;
+
+  bottom:95px;
+
+  width:300px;
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+
+  z-index:5;
+
+  animation:growPlant .8s ease;
+}
+
+/* 3 TUNAS */
+.sprout-row{
+  display:flex;
+  gap:35px;
+
+  font-size:48px;
+}
+
+/* HASIL PANEN */
+.plant{
+  font-size:90px;
+}
+
+@keyframes growPlant{
+
+  0%{
+    transform:
+      scale(.2)
+      translateY(100px);
+
+    opacity:0;
+  }
+
+  100%{
+    transform:
+      scale(1)
+      translateY(0);
+
+    opacity:1;
+  }
+
+}
+
+/* ================================= */
+/* POPUP PANEN */
+/* ================================= */
+
+.harvest-result{
+  position:absolute;
+
+  top:0;
+  left:0;
+
+  width:100%;
+  height:100%;
+
+  background:rgba(0,0,0,.45);
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  z-index:999;
+}
+
+.harvest-popup{
+  background:white;
+
+  width:90%;
+  max-width:500px;
+
+  padding:40px;
+
+  border-radius:35px;
+
+  text-align:center;
+
+  animation:popupShow .5s ease;
+
+  box-shadow:
+    0 15px 35px rgba(0,0,0,.2);
+}
+
+.harvest-fruit{
+  font-size:120px;
+  margin-bottom:20px;
+}
+
+.harvest-title{
+  color:#2e7d32;
+  margin-bottom:20px;
+}
+
+#harvestText{
+  font-size:28px;
+  line-height:1.5;
+  margin-bottom:25px;
+}
+
+@keyframes popupShow{
+
+  from{
+    transform:scale(.5);
+    opacity:0;
+  }
+
+  to{
+    transform:scale(1);
+    opacity:1;
+  }
+
+}
+
+/* ================================= */
+/* CONTROL */
+/* ================================= */
+
+.garden-controls{
+  width:100%;
+  max-width:950px;
+
+  display:grid;
+
+  grid-template-columns:
+    repeat(4,1fr);
+
+  gap:25px;
+}
+
+/* ================================= */
+/* CARD */
+/* ================================= */
+
+.control-card{
+  background:white;
+
+  border-radius:35px;
+
+  padding:30px 20px;
+
+  text-align:center;
+
+  box-shadow:
+    0 10px 25px rgba(0,0,0,.1);
+
+  transition:.3s;
+
+  position:relative;
+}
+
+.control-card:hover{
+  transform:translateY(-8px);
+}
+
+.control-icon{
+  font-size:70px;
+  margin-bottom:20px;
+}
+
+.control-card h3{
+  font-size:28px;
+  color:#2e7d32;
+  margin-bottom:20px;
+}
+
+/* ================================= */
+/* BUTTON */
+/* ================================= */
+
+.garden-btn{
+  background:
+    linear-gradient(
+      to right,
+      #66bb6a,
+      #43a047
+    );
+
+  color:white;
+
+  border:none;
+
+  padding:16px 30px;
+
+  border-radius:20px;
+
+  font-size:24px;
+
+  font-family:'Fredoka', sans-serif;
+
+  cursor:pointer;
+
+  transition:.3s;
+
+  box-shadow:
+    0 8px 18px rgba(0,0,0,.1);
+}
+
+.garden-btn:hover{
+  transform:scale(1.08);
+}
+
+.garden-btn:disabled{
+  opacity:.5;
+  cursor:not-allowed;
+}
+
+/* ================================= */
+/* FINISH */
+/* ================================= */
+
+.finish-box{
+  display:none;
+
+  margin-top:40px;
+
+  background:white;
+
+  padding:40px;
+
+  border-radius:35px;
+
+  text-align:center;
+
+  box-shadow:
+    0 10px 25px rgba(0,0,0,.12);
+}
+
+/* ================================= */
+/* RESPONSIVE */
+/* ================================= */
+
+@media(max-width:900px){
+
+  .garden-area{
+    height:500px;
+  }
+
+  .farm-zone{
+    width:100%;
+  }
+
+  .soil{
+    width:320px;
+    height:100px;
+  }
+
+  .sprout-row{
+    font-size:38px;
+    gap:20px;
+  }
+
+  .plant{
+    font-size:70px;
+  }
+
+  .garden-controls{
+    grid-template-columns:
+      repeat(2,1fr);
+  }
+
+}
+
+@media(max-width:600px){
+
+  .garden-area{
+    height:420px;
+  }
+
+  .garden-controls{
+    grid-template-columns:1fr;
+  }
+
+  .soil{
+    width:260px;
+    height:80px;
+  }
+
+  .seed-row{
+    gap:20px;
+    font-size:34px;
+  }
+
+  .sprout-row{
+    font-size:30px;
+    gap:15px;
+  }
+
+  .plant{
+    font-size:60px;
+  }
+
+  .control-card h3{
+    font-size:22px;
+  }
+
+  .garden-btn{
+    width:100%;
+  }
+
+  .seed-popup{
+    padding:30px 20px;
+  }
+
+  .seed-popup h2{
+    font-size:28px;
+  }
+
+  .seed-list{
+    gap:12px;
+  }
+
+  .seed-choice{
+    width:110px;
+    height:110px;
+  }
+
+  .seed-icon{
+    font-size:42px;
+  }
+
+  .seed-name{
+    font-size:18px;
+  }
+
+  .harvest-fruit{
+    font-size:90px;
+  }
+
+  #harvestText{
+    font-size:22px;
+  }
+
+}
