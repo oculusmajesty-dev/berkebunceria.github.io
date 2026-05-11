@@ -251,18 +251,65 @@ h2{
   gap:20px;
 }
 
-.choices button{
-  background:#66bb6a;
-  color:white;
+/* BUTTON DASAR */
+.choice-btn{
+  min-width:140px;
   padding:18px 28px;
   border-radius:20px;
   font-size:26px;
+  color:white;
+  font-weight:bold;
+  border:none;
+  cursor:pointer;
+  transition:.3s;
+  box-shadow:
+    0 8px 15px rgba(0,0,0,.12);
 }
 
-.choices button:hover{
-  background:#43a047;
-  transform:scale(1.05);
+/* HOVER */
+.choice-btn:hover{
+  transform:
+    scale(1.08)
+    rotate(-2deg);
 }
+
+/* ================================= */
+/* WARNA PILIHAN */
+/* ================================= */
+
+.choice-red{
+  background:#ef5350;
+}
+
+.choice-green{
+  background:#66bb6a;
+}
+
+.choice-blue{
+  background:#42a5f5;
+}
+
+.choice-yellow{
+  background:#fdd835;
+  color:#333;
+}
+
+.choice-orange{
+  background:#fb8c00;
+}
+
+.choice-purple{
+  background:#ab47bc;
+}
+
+.choice-pink{
+  background:#ec407a;
+}
+
+.choice-brown{
+  background:#8d6e63;
+}
+
 
 /* ================================= */
 /* FEEDBACK */
@@ -318,7 +365,8 @@ h2{
 
 .fruit-img,
 .shadow-img{
-  width:150px;
+  width:120px;
+  max-width:100%;
 }
 
 .shadow-img{
@@ -400,6 +448,24 @@ h2{
 
 }
 
+@media(max-width:768px){
+
+  .match-row{
+    gap:20px;
+  }
+
+  .fruit-img,
+  .shadow-img{
+    width:80px;
+  }
+
+  .dot{
+    width:28px;
+    height:28px;
+  }
+
+}
+
 /* ================================= */
 /* GAME 3 */
 /* ================================= */
@@ -436,50 +502,38 @@ h2{
 }
 
 /* ================================= */
-/* GAME 4 NEW GARDEN */
+/* GAME 4 GARDEN SIMULATION */
 /* ================================= */
+
+.hidden{
+  display:none !important;
+}
 
 .garden-game{
   margin-top:40px;
-
   display:flex;
   flex-direction:column;
-
   align-items:center;
-
   gap:35px;
 }
 
 /* ================================= */
-/* KEBUN */
+/* GARDEN AREA */
 /* ================================= */
 
 .garden-area{
   width:100%;
   max-width:950px;
   height:650px;
-
   border-radius:40px;
-
   overflow:hidden;
-
   position:relative;
-
-  background:
-    linear-gradient(
-      to bottom,
-      #8fd0ff 0%,
-      #bdefff 60%,
-      #93d94d 60%,
-      #63bb05 100%
-    );
-
-  box-shadow:
-    0 15px 35px rgba(0,0,0,.15);
+  background:linear-gradient(to bottom, #8fd0ff 0%, #bdefff 60%, #93d94d 60%, #63bb05 100%);
+  box-shadow:0 15px 35px rgba(0,0,0,.15);
 }
 
 /* ================================= */
-/* LANGIT */
+/* SKY */
 /* ================================= */
 
 .sky{
@@ -505,7 +559,6 @@ h2{
 .cloud1{
   width:140px;
   height:70px;
-
   top:60px;
   left:90px;
 }
@@ -513,7 +566,6 @@ h2{
 .cloud1::before{
   width:70px;
   height:70px;
-
   left:15px;
   top:-35px;
 }
@@ -521,7 +573,6 @@ h2{
 .cloud1::after{
   width:80px;
   height:80px;
-
   right:15px;
   top:-40px;
 }
@@ -529,7 +580,6 @@ h2{
 .cloud2{
   width:150px;
   height:75px;
-
   top:140px;
   right:90px;
 }
@@ -537,7 +587,6 @@ h2{
 .cloud2::before{
   width:80px;
   height:80px;
-
   left:20px;
   top:-35px;
 }
@@ -545,197 +594,459 @@ h2{
 .cloud2::after{
   width:85px;
   height:85px;
-
   right:15px;
   top:-40px;
 }
 
 /* ================================= */
-/* RUMPUT */
+/* SUN */
+/* ================================= */
+
+.sun{
+  position:absolute;
+  top:30px;
+  right:40px;
+  font-size:80px;
+  z-index:10;
+  animation:sunRise .8s ease;
+}
+
+@keyframes sunRise{
+  from{
+    opacity:0;
+    transform:translateY(-50px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+@keyframes sunGlow{
+  0%{
+    text-shadow:0 0 20px rgba(255,200,0,0);
+  }
+  50%{
+    text-shadow:0 0 40px rgba(255,200,0,.8);
+  }
+  100%{
+    text-shadow:0 0 20px rgba(255,200,0,0);
+  }
+}
+
+.sun.active{
+  animation:sunGlow 1.5s ease infinite;
+}
+
+/* ================================= */
+/* GRASS */
 /* ================================= */
 
 .grass{
   position:absolute;
-
   bottom:0;
-
   width:100%;
   height:40%;
-
-  background:
-    linear-gradient(
-      to bottom,
-      #93d94d,
-      #63bb05
-    );
+  background:linear-gradient(to bottom, #93d94d, #63bb05);
 }
 
 /* ================================= */
-/* AREA TANAM */
+/* FARM ZONE */
 /* ================================= */
 
 .farm-zone{
   position:absolute;
-
-  bottom:90px;
+  bottom:60px;
   left:50%;
-
   transform:translateX(-50%);
-
   width:500px;
-  height:240px;
-
+  height:300px;
   display:flex;
   align-items:flex-end;
   justify-content:center;
 }
 
 /* ================================= */
-/* TANAH */
+/* SOIL */
 /* ================================= */
 
 .soil{
   width:420px;
   height:120px;
-
-  background:
-    linear-gradient(
-      to bottom,
-      #8b572a,
-      #6b3d18
-    );
-
+  background:linear-gradient(to bottom, #8b572a, #6b3d18);
   border-radius:50%;
-
   position:absolute;
-
   bottom:0;
-
-  animation:soilShow .6s ease;
-
   z-index:2;
+  animation:soilShow .6s ease;
+  box-shadow:inset 0 4px 10px rgba(0,0,0,.3), 0 4px 8px rgba(0,0,0,.2);
 }
 
 @keyframes soilShow{
-
   from{
     transform:scale(.5);
     opacity:0;
   }
-
   to{
     transform:scale(1);
     opacity:1;
   }
-
-}
-
-.hidden{
-  display:none !important;
 }
 
 /* ================================= */
-/* POPUP PILIH BIBIT */
+/* SEED IN SOIL */
+/* ================================= */
+
+.seed-container{
+  position:absolute;
+  bottom:30px;
+  left:50%;
+  transform:translateX(-50%);
+  width:60px;
+  height:60px;
+  z-index:3;
+  animation:seedPlant .6s ease;
+}
+
+.seed-buried{
+  width:40px;
+  height:40px;
+  font-size:32px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  animation:burySeed .4s ease;
+}
+
+@keyframes seedPlant{
+  from{
+    transform:scale(0);
+    opacity:0;
+  }
+  to{
+    transform:scale(1);
+    opacity:1;
+  }
+}
+
+@keyframes burySeed{
+  0%{
+    transform:translateY(-30px);
+    opacity:0;
+  }
+  50%{
+    opacity:1;
+  }
+  100%{
+    transform:translateY(0);
+    opacity:.7;
+  }
+}
+
+/* ================================= */
+/* PLANT GROWTH SYSTEM */
+/* ================================= */
+
+.plant-container{
+  position:absolute;
+  bottom:30px;
+  left:50%;
+  transform:translateX(-50%);
+  width:100px;
+  height:250px;
+  z-index:4;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:flex-end;
+}
+
+.plant-root{
+  position:absolute;
+  bottom:0;
+  width:30px;
+  height:15px;
+  background:#4a3219;
+  border-radius:50%;
+  z-index:1;
+}
+
+/* STEM - grows upward */
+.plant-stem{
+  position:absolute;
+  bottom:12px;
+  width:4px;
+  height:0;
+  background:linear-gradient(to top, #2e7d32, #4caf50);
+  transform-origin:bottom center;
+  animation:stemGrow 1.5s ease forwards;
+  z-index:2;
+}
+
+@keyframes stemGrow{
+  from{
+    height:0;
+  }
+  to{
+    height:120px;
+  }
+}
+
+/* LEAVES - attached to stem */
+.plant-leaves-wrapper{
+  position:absolute;
+  bottom:50px;
+  width:80px;
+  height:60px;
+  z-index:3;
+  animation:leavesGrow .8s ease .5s forwards;
+  opacity:0;
+}
+
+.plant-leaf{
+  position:absolute;
+  width:35px;
+  height:25px;
+  background:radial-gradient(ellipse at 60% 40%, #66bb6a, #2e7d32);
+  border-radius:50% 50% 50% 0;
+  opacity:0;
+  animation:leafGrow .6s ease forwards;
+}
+
+.plant-leaf:first-child{
+  left:-15px;
+  top:10px;
+  transform:rotate(-30deg);
+  animation-delay:.6s;
+}
+
+.plant-leaf:last-child{
+  right:-15px;
+  top:10px;
+  transform:rotate(30deg);
+  animation-delay:.8s;
+}
+
+@keyframes leafGrow{
+  from{
+    opacity:0;
+    transform:scale(0);
+  }
+  to{
+    opacity:1;
+    transform:scale(1);
+  }
+}
+
+@keyframes leavesGrow{
+  from{
+    opacity:0;
+  }
+  to{
+    opacity:1;
+  }
+}
+
+.plant-fruit{
+  position:absolute;
+  top:60px;
+  left:50%;
+  transform:translateX(-90%);
+  font-size:45px;
+  z-index:5;
+  animation:fruitGrow .7s ease 1.2s forwards;
+  opacity:0;
+  filter:drop-shadow(0 2px 4px rgba(0,0,0,.1));
+}
+
+@keyframes fruitGrow{
+  from{
+    opacity:0;
+    transform:translateX(-50%) scale(0);
+  }
+  to{
+    opacity:1;
+    transform:translateX(-50%) scale(1);
+  }
+}
+
+/* ================================= */
+/* WATER EFFECT */
+/* ================================= */
+
+.water-effect{
+  position:absolute;
+  top:-80px;
+  left:50%;
+  transform:translateX(-50%);
+  width:80px;
+  height:100px;
+  z-index:20;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:8px;
+}
+
+.water-drop{
+  font-size:32px;
+  animation:waterFall .8s ease infinite;
+}
+
+.water-drop:nth-child(2){
+  animation-delay:.2s;
+}
+
+.water-drop:nth-child(3){
+  animation-delay:.4s;
+}
+
+@keyframes waterFall{
+  0%{
+    opacity:1;
+    transform:translateY(-50px);
+  }
+  90%{
+    opacity:1;
+  }
+  100%{
+    opacity:0;
+    transform:translateY(40px);
+  }
+}
+
+/* ================================= */
+/* BASKET */
+/* ================================= */
+
+.basket{
+  position:absolute;
+  bottom:50px;
+  right:80px;
+  z-index:6;
+  animation:basketAppear .6s ease;
+}
+
+.basket-body{
+  font-size:70px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:100px;
+  height:80px;
+}
+
+.harvest-fruits{
+  position:absolute;
+  bottom:15px;
+  left:50%;
+  transform:translateX(-50%);
+  display:flex;
+  gap:5px;
+  font-size:32px;
+  min-height:40px;
+  justify-content:center;
+}
+
+.harvest-fruit-item{
+  animation:fruitFall .8s ease;
+}
+
+@keyframes basketAppear{
+  from{
+    opacity:0;
+    transform:translateY(30px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+@keyframes fruitFall{
+  from{
+    opacity:0;
+    transform:translateY(-100px) scale(0);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0) scale(1);
+  }
+}
+
+/* ================================= */
+/* SEED SELECTION POPUP */
 /* ================================= */
 
 .seed-options{
   position:absolute;
-
   top:0;
   left:0;
-
   width:100%;
   height:100%;
-
   background:rgba(0,0,0,.45);
-
   display:flex;
   align-items:center;
   justify-content:center;
-
   z-index:999;
 }
 
-/* BOX POPUP */
 .seed-popup{
   background:white;
-
   width:90%;
   max-width:600px;
-
   padding:40px;
-
   border-radius:35px;
-
   text-align:center;
-
   animation:popupShow .5s ease;
-
-  box-shadow:
-    0 15px 35px rgba(0,0,0,.2);
+  box-shadow:0 15px 35px rgba(0,0,0,.2);
 }
 
-/* TITLE */
 .seed-popup h2{
   font-size:38px;
   color:#2e7d32;
-
   margin-bottom:30px;
 }
 
-/* LIST PILIHAN */
 .seed-list{
   display:flex;
   justify-content:center;
   gap:20px;
   flex-wrap:wrap;
+  margin-bottom:20px;
 }
 
-/* CARD BIBIT */
 .seed-choice{
   background:#f7fff1;
-
-  border:none;
-
+  border:3px solid #66bb6a;
   width:140px;
   height:140px;
-
   border-radius:30px;
-
   display:flex;
   flex-direction:column;
   align-items:center;
   justify-content:center;
-
   gap:10px;
-
   cursor:pointer;
-
   transition:.3s;
-
   font-family:'Fredoka', sans-serif;
-
-  box-shadow:
-    0 10px 20px rgba(0,0,0,.08);
+  box-shadow:0 10px 20px rgba(0,0,0,.08);
 }
 
 .seed-choice:hover{
-  transform:
-    translateY(-8px)
-    scale(1.05);
-
+  transform:translateY(-8px) scale(1.05);
   background:#e8ffd8;
+  border-color:#43a047;
 }
 
-/* ICON */
 .seed-icon{
   font-size:55px;
 }
 
-/* TEXT */
 .seed-name{
   font-size:22px;
   color:#2e7d32;
+  font-weight:600;
 }
 
 .tanam-info{
@@ -745,332 +1056,108 @@ h2{
   line-height:1.5;
 }
 
-/* ================================= */
-/* BIJI */
-/* ================================= */
-
-.seed-area{
-  position:absolute;
-
-  bottom:38px;
-
-  width:260px;
-
-  display:flex;
-  justify-content:center;
-  align-items:center;
-
-  z-index:3;
-
-  font-size:42px;
-
-  animation:seedPlant .9s ease;
-}
-
-/* BIJI BERJAJAR */
-.seed-row{
-  display:flex;
-  gap:35px;
-}
-
-/* BIJI MASUK TANAH */
-.seed-row{
-  transform:translateY(18px);
-}
-
-@keyframes seedPlant{
-
-  0%{
-    transform:
-      translateY(-120px)
-      scale(.4);
-
-    opacity:0;
-  }
-
-  70%{
-    transform:
-      translateY(15px)
-      scale(1.05);
-  }
-
-  100%{
-    transform:
-      translateY(0)
-      scale(1);
-
-    opacity:1;
-  }
-
-}
-
-/* ================================= */
-/* AIR */
-/* ================================= */
-
-.water-effect{
-  position:absolute;
-
-  top:20px;
-
-  font-size:50px;
-
-  z-index:20;
-
-  animation:watering 1s infinite;
-}
-
-@keyframes watering{
-
-  0%{
-    transform:translateY(0);
-  }
-
-  50%{
-    transform:translateY(12px);
-  }
-
-  100%{
-    transform:translateY(0);
-  }
-
-}
-
-/* ================================= */
-/* TANAMAN */
-/* ================================= */
-
-.plant{
-  position:absolute;
-
-  bottom:95px;
-
-  width:300px;
-
-  display:flex;
-  justify-content:center;
-  align-items:center;
-
-  z-index:5;
-
-  animation:growPlant .8s ease;
-}
-
-/* 3 TUNAS */
-.sprout-row{
-  display:flex;
-  gap:35px;
-
-  font-size:48px;
-}
-
-/* HASIL PANEN */
-.plant{
-  font-size:90px;
-}
-
-@keyframes growPlant{
-
-  0%{
-    transform:
-      scale(.2)
-      translateY(100px);
-
-    opacity:0;
-  }
-
-  100%{
-    transform:
-      scale(1)
-      translateY(0);
-
-    opacity:1;
-  }
-
-}
-
-/* ================================= */
-/* POPUP PANEN */
-/* ================================= */
-
-.harvest-result{
-  position:absolute;
-
-  top:0;
-  left:0;
-
-  width:100%;
-  height:100%;
-
-  background:rgba(0,0,0,.45);
-
-  display:flex;
-  align-items:center;
-  justify-content:center;
-
-  z-index:999;
-}
-
-.harvest-popup{
-  background:white;
-
-  width:90%;
-  max-width:500px;
-
-  padding:40px;
-
-  border-radius:35px;
-
-  text-align:center;
-
-  animation:popupShow .5s ease;
-
-  box-shadow:
-    0 15px 35px rgba(0,0,0,.2);
-}
-
-.harvest-fruit{
-  font-size:120px;
-  margin-bottom:20px;
-}
-
-.harvest-title{
-  color:#2e7d32;
-  margin-bottom:20px;
-}
-
-#harvestText{
-  font-size:28px;
-  line-height:1.5;
-  margin-bottom:25px;
-}
-
 @keyframes popupShow{
-
   from{
     transform:scale(.5);
     opacity:0;
   }
-
   to{
     transform:scale(1);
     opacity:1;
   }
-
 }
 
 /* ================================= */
-/* CONTROL */
+/* CONTROLS */
 /* ================================= */
 
 .garden-controls{
   width:100%;
   max-width:950px;
-
   display:grid;
-
-  grid-template-columns:
-    repeat(4,1fr);
-
-  gap:25px;
+  grid-template-columns:repeat(5,1fr);
+  gap:20px;
 }
 
 /* ================================= */
-/* CARD */
+/* CONTROL CARD */
 /* ================================= */
 
 .control-card{
   background:white;
-
-  border-radius:35px;
-
-  padding:30px 20px;
-
+  border-radius:25px;
+  padding:25px 15px;
   text-align:center;
-
-  box-shadow:
-    0 10px 25px rgba(0,0,0,.1);
-
+  box-shadow:0 8px 20px rgba(0,0,0,.12);
   transition:.3s;
-
   position:relative;
+  border:2px solid transparent;
 }
 
 .control-card:hover{
-  transform:translateY(-8px);
+  transform:translateY(-6px);
+  box-shadow:0 12px 28px rgba(0,0,0,.15);
 }
 
 .control-icon{
-  font-size:70px;
-  margin-bottom:20px;
+  font-size:65px;
+  margin-bottom:15px;
+  display:block;
 }
 
 .control-card h3{
-  font-size:28px;
+  font-size:24px;
   color:#2e7d32;
-  margin-bottom:20px;
+  margin-bottom:15px;
+  font-weight:600;
 }
 
 /* ================================= */
-/* BUTTON */
+/* GARDEN BUTTON */
 /* ================================= */
 
 .garden-btn{
-  background:
-    linear-gradient(
-      to right,
-      #66bb6a,
-      #43a047
-    );
-
+  background:linear-gradient(to right, #66bb6a, #43a047);
   color:white;
-
   border:none;
-
-  padding:16px 30px;
-
-  border-radius:20px;
-
-  font-size:24px;
-
+  padding:14px 24px;
+  border-radius:18px;
+  font-size:22px;
   font-family:'Fredoka', sans-serif;
-
+  font-weight:600;
   cursor:pointer;
-
   transition:.3s;
-
-  box-shadow:
-    0 8px 18px rgba(0,0,0,.1);
+  box-shadow:0 6px 16px rgba(66,160,67,.3);
+  width:100%;
 }
 
-.garden-btn:hover{
-  transform:scale(1.08);
+.garden-btn:hover:not(:disabled){
+  transform:scale(1.06);
+  box-shadow:0 8px 20px rgba(66,160,67,.4);
+}
+
+.garden-btn:active:not(:disabled){
+  transform:scale(0.98);
 }
 
 .garden-btn:disabled{
   opacity:.5;
   cursor:not-allowed;
+  background:linear-gradient(to right, #bbb, #999);
 }
 
 /* ================================= */
-/* FINISH */
+/* FINISH BOX */
 /* ================================= */
 
 .finish-box{
   display:none;
-
   margin-top:40px;
-
   background:white;
-
   padding:40px;
-
   border-radius:35px;
-
   text-align:center;
-
-  box-shadow:
-    0 10px 25px rgba(0,0,0,.12);
+  box-shadow:0 10px 25px rgba(0,0,0,.12);
 }
 
 /* ================================= */
@@ -1083,8 +1170,9 @@ h2{
     height:500px;
   }
 
-  .farm-zone{
-    width:100%;
+  .garden-controls{
+    grid-template-columns:repeat(2,1fr);
+    gap:15px;
   }
 
   .soil{
@@ -1092,18 +1180,20 @@ h2{
     height:100px;
   }
 
-  .sprout-row{
-    font-size:38px;
-    gap:20px;
+  .plant-container{
+    height:160px;
   }
 
-  .plant{
-    font-size:70px;
+  .plant-stem{
+    height:100px;
   }
 
-  .garden-controls{
-    grid-template-columns:
-      repeat(2,1fr);
+  .plant-fruit{
+    font-size:40px;
+  }
+
+  .basket{
+    right:60px;
   }
 
 }
@@ -1116,6 +1206,7 @@ h2{
 
   .garden-controls{
     grid-template-columns:1fr;
+    gap:12px;
   }
 
   .soil{
@@ -1123,26 +1214,38 @@ h2{
     height:80px;
   }
 
-  .seed-row{
-    gap:20px;
-    font-size:34px;
+  .control-card{
+    padding:20px 12px;
   }
 
-  .sprout-row{
-    font-size:30px;
-    gap:15px;
-  }
-
-  .plant{
-    font-size:60px;
+  .control-icon{
+    font-size:50px;
   }
 
   .control-card h3{
-    font-size:22px;
+    font-size:20px;
+    margin-bottom:10px;
   }
 
   .garden-btn{
-    width:100%;
+    font-size:18px;
+    padding:12px 18px;
+  }
+
+  .plant-container{
+    height:140px;
+  }
+
+  .plant-stem{
+    height:85px;
+  }
+
+  .plant-fruit{
+    font-size:35px;
+  }
+
+  .basket{
+    right:40px;
   }
 
   .seed-popup{
@@ -1170,12 +1273,14 @@ h2{
     font-size:18px;
   }
 
-  .harvest-fruit{
-    font-size:90px;
-  }
-
-  #harvestText{
-    font-size:22px;
-  }
-
 }
+
+@keyframes stemGrowMore{
+  from{
+    height:120px;
+  }
+  to{
+    height:150px;
+  }
+}
+

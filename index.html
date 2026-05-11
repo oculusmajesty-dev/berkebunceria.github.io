@@ -106,14 +106,21 @@
 
         <h3 id="colorQuestion"></h3>
 
-        <div id="colorChoices" class="choices"></div>
+        <div
+          id="colorChoices"
+          class="choices">
+        </div>
 
-        <p id="feedback1" class="feedback"></p>
+        <p
+          id="feedback1"
+          class="feedback">
+        </p>
 
       </div>
 
       <div class="score-box">
-        ⭐ Score: <span id="score1">0</span>
+        ⭐ Score:
+        <span id="score1">0</span>
       </div>
 
     </section>
@@ -138,14 +145,12 @@
         <!-- GARIS -->
         <svg id="lineContainer"></svg>
 
-        <!-- GAME -->
         <div class="match-game">
 
           <!-- BARIS 1 -->
           <div class="match-row">
 
             <div class="left-item">
-
               <img
                 src="https://cdn-icons-png.flaticon.com/512/415/415733.png"
                 class="fruit-img"
@@ -155,30 +160,27 @@
                 class="dot left-dot"
                 data-name="apple"
               ></div>
-
             </div>
 
             <div class="right-item">
-
               <div
                 class="dot right-dot"
-                data-name="strawberry"
+                data-name="pumpkin"
               ></div>
 
               <img
-                src="https://cdn-icons-png.flaticon.com/512/590/590685.png"
+                src="assets/gambar/pumpkin.png"
                 class="shadow-img"
               >
-
             </div>
 
           </div>
+
 
           <!-- BARIS 2 -->
           <div class="match-row">
 
             <div class="left-item">
-
               <img
                 src="https://cdn-icons-png.flaticon.com/512/590/590685.png"
                 class="fruit-img"
@@ -188,24 +190,23 @@
                 class="dot left-dot"
                 data-name="strawberry"
               ></div>
-
             </div>
 
             <div class="right-item">
 
               <div
                 class="dot right-dot"
-                data-name="carrot"
+                data-name="apple"
               ></div>
 
               <img
-                src="assets/gambar/carrot_766022.png"
+                src="https://cdn-icons-png.flaticon.com/512/415/415733.png"
                 class="shadow-img"
               >
-
             </div>
 
           </div>
+
 
           <!-- BARIS 3 -->
           <div class="match-row">
@@ -213,7 +214,7 @@
             <div class="left-item">
 
               <img
-                src="assets/gambar/carrot_766022.png"
+                src="assets/gambar/carrot.png"
                 class="fruit-img"
               >
 
@@ -228,11 +229,113 @@
 
               <div
                 class="dot right-dot"
-                data-name="apple"
+                data-name="garlic"
               ></div>
 
               <img
-                src="https://cdn-icons-png.flaticon.com/512/415/415733.png"
+                src="assets/gambar/garlic.png"
+                class="shadow-img"
+              >
+
+            </div>
+
+          </div>
+
+
+          <!-- BARIS 4 -->
+          <div class="match-row">
+
+            <div class="left-item">
+
+              <img
+                src="assets/gambar/garlic.png"
+                class="fruit-img"
+              >
+
+              <div
+                class="dot left-dot"
+                data-name="garlic"
+              ></div>
+
+            </div>
+
+            <div class="right-item">
+
+              <div
+                class="dot right-dot"
+                data-name="avocado"
+              ></div>
+
+              <img
+                src="assets/gambar/avocado.png"
+                class="shadow-img"
+              >
+
+            </div>
+
+          </div>
+
+
+          <!-- BARIS 5 -->
+          <div class="match-row">
+
+            <div class="left-item">
+
+              <img
+                src="assets/gambar/pumpkin.png"
+                class="fruit-img"
+              >
+
+              <div
+                class="dot left-dot"
+                data-name="pumpkin"
+              ></div>
+
+            </div>
+
+            <div class="right-item">
+
+              <div
+                class="dot right-dot"
+                data-name="carrot"
+              ></div>
+
+              <img
+                src="assets/gambar/carrot.png"
+                class="shadow-img"
+              >
+
+            </div>
+
+          </div>
+
+
+          <!-- BARIS 6 -->
+          <div class="match-row">
+
+            <div class="left-item">
+
+              <img
+                src="assets/gambar/avocado.png"
+                class="fruit-img"
+              >
+
+              <div
+                class="dot left-dot"
+                data-name="avocado"
+              ></div>
+
+            </div>
+
+            <div class="right-item">
+
+              <div
+                class="dot right-dot"
+                data-name="strawberry"
+              ></div>
+
+              <img
+                src="https://cdn-icons-png.flaticon.com/512/590/590685.png"
                 class="shadow-img"
               >
 
@@ -278,316 +381,176 @@
 
 
 
-   <!-- ================================= -->
-<!-- GAME 4 -->
-<!-- ================================= -->
+    <!-- ================================= -->
+    <!-- GAME 4 -->
+    <!-- ================================= -->
 
-<section id="game4" class="page">
+    <section id="game4" class="page">
 
-  <h2>🌿 Game 4 - Cara Menanam</h2>
+      <h2>🌿 Game 4 - Cara Menanam</h2>
 
-  <p class="game-info">
-    Ikuti langkah berkebun sampai panen 🌱
-  </p>
+      <p class="game-info">
+        Ikuti langkah berkebun: Tanah → Bibit → Siram → Panas → Panen 🌱
+      </p>
 
-  <!-- AREA GAME -->
-  <div class="garden-game">
+      <!-- AREA GAME -->
+      <div class="garden-game">
 
-    <!-- KEBUN -->
-    <div class="garden-area">
+        <!-- KEBUN -->
+        <div class="garden-area">
 
-      <!-- LANGIT -->
-      <div class="sky">
+          <!-- LANGIT -->
+          <div class="sky">
+            <div class="cloud cloud1"></div>
+            <div class="cloud cloud2"></div>
+            <div id="sun" class="sun hidden">☀️</div>
+          </div>
 
-        <div class="cloud cloud1"></div>
-        <div class="cloud cloud2"></div>
+          <!-- RUMPUT -->
+          <div class="grass"></div>
 
-      </div>
+          <!-- AREA TANAM -->
+          <div class="farm-zone">
 
-      <!-- RUMPUT -->
-      <div class="grass"></div>
+            <!-- TANAH -->
+            <div id="soil" class="soil hidden"></div>
 
-      <!-- AREA TANAM -->
-      <div class="farm-zone">
+            <!-- BIJI DI TANAH -->
+            <div id="seedContainer" class="seed-container hidden">
+              <div class="seed-buried">🫘</div>
+            </div>
 
-        <!-- TANAH -->
-        <div id="soil" class="soil hidden"></div>
+            <!-- EFEK SIRAM AIR -->
+            <div id="waterEffect" class="water-effect hidden">
+              <div class="water-drop">💧</div>
+              <div class="water-drop">💧</div>
+              <div class="water-drop">💧</div>
+            </div>
 
-        <!-- BIJI -->
-        <div
-          id="seedArea"
-          class="seed-area hidden"
-        >
+            <!-- TANAMAN TUMBUH -->
+            <div id="plantContainer" class="plant-container hidden">
+              <div class="plant-root"></div>
+              <div class="plant-stem" id="plantStem"></div>
+              <div class="plant-leaves-wrapper">
+                <div class="plant-leaf"></div>
+                <div class="plant-leaf"></div>
+              </div>
+              <div class="plant-fruit" id="plantFruit">🍓</div>
+            </div>
 
-          <div class="seed-row">
-            🫘 🫘 🫘
+            <!-- KERANJANG PANEN -->
+            <div id="basket" class="basket hidden">
+              <div class="basket-body">🧺</div>
+              <div class="harvest-fruits" id="harvestFruits"></div>
+            </div>
+
           </div>
 
         </div>
 
-        <!-- AIR -->
-        <div
-          id="waterEffect"
-          class="water-effect hidden"
-        >
-          💧💧💧
-        </div>
+        <!-- ================================= -->
+        <!-- POPUP PILIH BIBIT -->
+        <!-- ================================= -->
 
-        <!-- TANAMAN -->
-        <div
-          id="plant"
-          class="plant hidden"
-        >
-
-          <div class="sprout-row">
-            🌱 🌱 🌱
+        <div id="seedOptions" class="seed-options hidden">
+          <div class="seed-popup">
+            <h2>🌱 Pilih Bibit</h2>
+            <div class="seed-list">
+              <button class="seed-choice" data-plant="stroberi">
+                <div class="seed-icon">🍓</div>
+                <div class="seed-name">Stroberi</div>
+              </button>
+              <button class="seed-choice" data-plant="wortel">
+                <div class="seed-icon">🥕</div>
+                <div class="seed-name">Wortel</div>
+              </button>
+              <button class="seed-choice" data-plant="jagung">
+                <div class="seed-icon">🌽</div>
+                <div class="seed-name">Jagung</div>
+              </button>
+            </div>
+            <p class="tanam-info">Pilih bibit yang ingin ditanam 🌱</p>
           </div>
-
         </div>
 
-      </div>
+        <!-- CONTROL -->
+        <div class="garden-controls">
 
-      <!-- ================================= -->
-      <!-- POPUP PILIH BIBIT -->
-      <!-- ================================= -->
-
-      <div
-        id="seedOptions"
-        class="seed-options hidden"
-      >
-
-        <!-- BOX POPUP -->
-        <div class="seed-popup">
-
-          <!-- TITLE -->
-          <h2>
-            🌱 Pilih Bibit
-          </h2>
-
-          <!-- PILIHAN -->
-          <div class="seed-list">
-
-            <!-- STROBERI -->
-            <button
-              class="seed-choice"
-              data-plant="stroberi"
-            >
-
-              <div class="seed-icon">
-                🍓
-              </div>
-
-              <div class="seed-name">
-                Buah
-              </div>
-
+          <!-- PILIH TANAH -->
+          <div class="control-card">
+            <div class="control-icon">🪴</div>
+            <h3>Siapkan Tanah</h3>
+            <button id="btnSoil" class="garden-btn">
+              Siapkan
             </button>
-
-            <!-- WORTEL -->
-            <button
-              class="seed-choice"
-              data-plant="wortel"
-            >
-
-              <div class="seed-icon">
-                🥕
-              </div>
-
-              <div class="seed-name">
-                Sayuran
-              </div>
-
-            </button>
-
-            <!-- JAGUNG -->
-            <button
-              class="seed-choice"
-              data-plant="jagung"
-            >
-
-              <div class="seed-icon">
-                🌽
-              </div>
-
-              <div class="seed-name">
-                Tanaman
-              </div>
-
-            </button>
-
           </div>
 
-          <!-- INFO -->
-          <p class="tanam-info">
-            Pilih bibit lalu tanam ke tanah 🌱
-          </p>
-
-        </div>
-
-      </div>
-
-      <!-- ================================= -->
-      <!-- POPUP PANEN -->
-      <!-- ================================= -->
-
-      <div
-        id="harvestResult"
-        class="harvest-result hidden"
-      >
-
-        <div class="harvest-popup">
-
-          <div
-            id="harvestFruit"
-            class="harvest-fruit"
-          >
-            🍓
+          <!-- PILIH BIBIT -->
+          <div class="control-card">
+            <div class="control-icon">🌱</div>
+            <h3>Tanam Bibit</h3>
+            <button id="btnSeed" class="garden-btn" disabled>
+              Tanam
+            </button>
           </div>
 
-          <h2 class="harvest-title">
-            🎉 Panen Berhasil!
-          </h2>
+          <!-- SIRAM -->
+          <div class="control-card">
+            <div class="control-icon">🚿</div>
+            <h3>Siram Air</h3>
+            <button id="btnWater" class="garden-btn" disabled>
+              Siram
+            </button>
+          </div>
 
-          <h3 id="harvestText">
-            Selamat kamu berhasil memanen buah stroberi 🍓
-          </h3>
+          <!-- SUN -->
+          <div class="control-card">
+            <div class="control-icon">☀️</div>
+            <h3>Sinar Matahari</h3>
+            <button id="btnSun" class="garden-btn" disabled>
+              Panaskan
+            </button>
+          </div>
 
-          <button
-            id="closeHarvest"
-            class="garden-btn"
-          >
-            Tutup
-          </button>
+          <!-- PANEN -->
+          <div class="control-card">
+            <div class="control-icon">🧺</div>
+            <h3>Panen Buah</h3>
+            <button id="btnHarvest" class="garden-btn" disabled>
+              Panen
+            </button>
+          </div>
 
         </div>
 
       </div>
 
-    </div>
+      <!-- FEEDBACK -->
+      <p id="feedback4" class="feedback"></p>
 
-    <!-- CONTROL -->
-    <div class="garden-controls">
+      <!-- SCORE -->
+      <div class="score-box">
+        ⭐ Score:
+        <span id="score4">0</span>
+      </div>
 
-      <!-- PILIH TANAH -->
-      <div class="control-card">
-
-        <div class="control-icon">
-          🪴
+      <!-- FINISH -->
+      <div class="finish-box">
+        <h2>🏆 Hebat! Kamu Berhasil Panen 🏆</h2>
+        <div class="stars">⭐⭐⭐</div>
+        <div class="final-score">
+          Total Score:
+          <span id="finalScore">0</span>
         </div>
-
-        <h3>Pilih Tanah</h3>
-
-        <button
-          id="btnSoil"
-          class="garden-btn"
-        >
-          Pilih
+        <button class="start-btn" onclick="location.reload()">
+          🔄 Main Lagi
         </button>
-
       </div>
 
-      <!-- PILIH BIBIT -->
-      <div class="control-card">
-
-        <div class="control-icon">
-          🌱
-        </div>
-
-        <h3>Pilih Bibit</h3>
-
-        <button
-          id="btnSeed"
-          class="garden-btn"
-          disabled
-        >
-          Pilih Bibit
-        </button>
-
-        <p class="tanam-info">
-          Pilih bibit lalu tanam ke tanah 🌱
-        </p>
-
-      </div>
-
-      <!-- SIRAM -->
-      <div class="control-card">
-
-        <div class="control-icon">
-          💧
-        </div>
-
-        <h3>Siram Tanaman</h3>
-
-        <button
-          id="btnWater"
-          class="garden-btn"
-          disabled
-        >
-          Siram
-        </button>
-
-      </div>
-
-      <!-- PANEN -->
-      <div class="control-card">
-
-        <div class="control-icon">
-          🧺
-        </div>
-
-        <h3>Panen</h3>
-
-        <button
-          id="btnHarvest"
-          class="garden-btn"
-          disabled
-        >
-          Panen
-        </button>
-
-      </div>
-
-    </div>
-
-  </div>
-
-  <!-- FEEDBACK -->
-  <p id="feedback4" class="feedback"></p>
-
-  <!-- SCORE -->
-  <div class="score-box">
-    ⭐ Score:
-    <span id="score4">0</span>
-  </div>
-
-  <!-- FINISH -->
-  <div class="finish-box">
-
-    <h2>
-      🏆 Hebat! Kamu Berhasil Panen 🏆
-    </h2>
-
-    <div class="stars">
-      ⭐⭐⭐
-    </div>
-
-    <div class="final-score">
-      Total Score:
-      <span id="finalScore">0</span>
-    </div>
-
-    <button
-      class="start-btn"
-      onclick="location.reload()"
-    >
-      🔄 Main Lagi
-    </button>
-
-  </div>
-
-</section>
+    </section>
 
 </div>
+
 
 <!-- JAVASCRIPT -->
 <script src="script.js"></script>

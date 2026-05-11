@@ -24,17 +24,22 @@ const yeySound =
 bgMusic.volume = 0.3;
 
 
-// =====================================
-// START GAME
-// =====================================
-
 function startGame() {
 
   bgMusic.play();
 
+  currentColorQuestion = 0;
+
+  score1 = 0;
+
+  colorQuestions.sort(
+    () => Math.random() - 0.5
+  );
+
+  loadColorQuestion();
+
   showPage('game1');
 }
-
 
 // =====================================
 // SHOW PAGE
@@ -90,6 +95,11 @@ function addScore(score) {
 // TEBAK WARNA
 // =====================================
 
+
+// =====================================
+// DATA SOAL
+// =====================================
+
 const colorQuestions = [
 
   {
@@ -128,7 +138,7 @@ const colorQuestions = [
 
   {
     image:
-      'assets/gambar/carrot_766022.png',
+      'assets/gambar/carrot.png',
 
     question:
       'Apa warna wortel?',
@@ -141,33 +151,144 @@ const colorQuestions = [
       'Oranye',
       'Biru'
     ]
+  },
+
+  // =====================================
+  // SOAL BARU
+  // =====================================
+
+  {
+    image:
+      'assets/gambar/eggplant.png',
+
+    question:
+      'Apa warna terong?',
+
+    answer:
+      'Ungu',
+
+    choices: [
+      'Ungu',
+      'Hijau',
+      'Merah'
+    ]
+  },
+
+  {
+    image:
+      'assets/gambar/sunflower-bloom.png',
+
+    question:
+      'Apa warna bunga matahari?',
+
+    answer:
+      'Kuning',
+
+    choices: [
+      'Biru',
+      'Kuning',
+      'Hijau'
+    ]
+  },
+
+  {
+    image:
+      'assets/gambar/broccoli.png',
+
+    question:
+      'Apa warna brokoli?',
+
+    answer:
+      'Hijau',
+
+    choices: [
+      'Hijau',
+      'Oranye',
+      'Merah'
+    ]
   }
 
 ];
+
+
+// =====================================
+// WARNA BUTTON
+// =====================================
+
+const colorClassMap = {
+
+  Merah:
+    'choice-red',
+
+  Hijau:
+    'choice-green',
+
+  Biru:
+    'choice-blue',
+
+  Kuning:
+    'choice-yellow',
+
+  Oranye:
+    'choice-orange',
+
+  Ungu:
+    'choice-purple',
+
+  Pink:
+    'choice-pink',
+
+  Coklat:
+    'choice-brown'
+
+};
+
+
+// =====================================
+// VARIABLE
+// =====================================
 
 let currentColorQuestion = 0;
 
 let score1 = 0;
 
 
+// =====================================
 // LOAD QUESTION
+// =====================================
+
 function loadColorQuestion() {
+
+  console.log(currentColorQuestion);
 
   const data =
     colorQuestions[currentColorQuestion];
 
+  // IMAGE
   document.getElementById('colorImage').src =
     data.image;
 
+  // QUESTION
   document.getElementById('colorQuestion')
     .innerText =
     data.question;
+
+  // CHOICES
+  renderChoices(data);
+
+}
+
+
+// =====================================
+// RENDER PILIHAN
+// =====================================
+
+function renderChoices(data){
 
   const choicesContainer =
     document.getElementById('colorChoices');
 
   choicesContainer.innerHTML = '';
-
 
   data.choices.forEach((choice) => {
 
@@ -176,66 +297,25 @@ function loadColorQuestion() {
 
     button.innerText = choice;
 
+    // CLASS DASAR
+    button.classList.add(
+      'choice-btn'
+    );
 
+    // CLASS WARNA
+    const colorClass =
+      colorClassMap[choice];
+
+    if(colorClass){
+
+      button.classList.add(colorClass);
+
+    }
+
+    // EVENT CLICK
     button.onclick = () => {
 
-      // BENAR
-      if (choice === data.answer) {
-
-        playCorrect();
-
-        document.getElementById('feedback1')
-          .innerText =
-          '✅ Benar! Hebat!';
-
-        score1 += 10;
-
-        addScore(10);
-
-        document.getElementById('score1')
-          .innerText =
-          score1;
-
-        currentColorQuestion++;
-
-
-        setTimeout(() => {
-
-          document.getElementById('feedback1')
-            .innerText = '';
-
-
-          // NEXT QUESTION
-          if (
-            currentColorQuestion <
-            colorQuestions.length
-          ) {
-
-            loadColorQuestion();
-
-          }
-
-          // FINISH GAME 1
-          else {
-
-            alert('🎉 Game 1 selesai!');
-
-            showPage('game2');
-          }
-
-        }, 1200);
-
-      }
-
-      // SALAH
-      else {
-
-        playWrong();
-
-        document.getElementById('feedback1')
-          .innerText =
-          '❌ Salah, coba lagi!';
-      }
+      checkAnswer(choice, data.answer);
 
     };
 
@@ -245,7 +325,67 @@ function loadColorQuestion() {
 
 }
 
-loadColorQuestion();
+
+function checkAnswer(choice, answer){
+
+  // BENAR
+  if(choice === answer){
+
+    playCorrect();
+
+    document.getElementById('feedback1')
+      .innerText =
+      '✅ Benar! Hebat!';
+
+    score1 += 10;
+
+    addScore(10);
+
+    document.getElementById('score1')
+      .innerText =
+      score1;
+
+    currentColorQuestion++;
+
+    setTimeout(() => {
+
+      document.getElementById('feedback1')
+        .innerText = '';
+
+      // NEXT QUESTION
+      if(
+        currentColorQuestion <
+        colorQuestions.length
+      ){
+
+        // INI YANG KURANG
+        loadColorQuestion();
+
+      }
+
+      // FINISH
+      else{
+
+        showPage('game2');
+
+      }
+
+    }, 1200);
+
+  }
+
+  // SALAH
+  else{
+
+    playWrong();
+
+    document.getElementById('feedback1')
+      .innerText =
+      '❌ Salah, coba lagi!';
+
+  }
+
+}
 
 
 // =====================================
@@ -259,12 +399,14 @@ let matchedCount = 0;
 let score2 = 0;
 
 
-// JAWABAN
 const matchAnswers = {
 
   apple: 'apple',
   strawberry: 'strawberry',
-  carrot: 'carrot'
+  carrot: 'carrot',
+  garlic: 'garlic',
+  pumpkin: 'pumpkin',
+  avocado: 'avocado'
 
 };
 
@@ -472,11 +614,9 @@ function checkMatchGame2() {
 
 
     // SELESAI
-    if (matchedCount === 3) {
+    if (matchedCount === 6) {
 
       setTimeout(() => {
-
-        alert('🎉 Game 2 selesai!');
 
         showPage('game3');
 
@@ -632,8 +772,6 @@ memoryItems.forEach((emoji) => {
 
         setTimeout(() => {
 
-          alert('🎉 Game 3 selesai!');
-
           showPage('game4');
 
         }, 1200);
@@ -675,344 +813,222 @@ memoryItems.forEach((emoji) => {
 
 
 // =====================================
-// GAME 4 NEW GARDEN SYSTEM
+// GAME 4 - GARDEN SIMULATION SYSTEM
 // =====================================
 
-const soil =
-  document.getElementById('soil');
+// DOM ELEMENTS
+const soil = document.getElementById('soil');
+const seedContainer = document.getElementById('seedContainer');
+const plantContainer = document.getElementById('plantContainer');
+const waterEffect = document.getElementById('waterEffect');
+const basket = document.getElementById('basket');
+const harvestFruits = document.getElementById('harvestFruits');
+const sun = document.getElementById('sun');
+const plantStem = document.getElementById('plantStem');
+const plantFruit = document.getElementById('plantFruit');
 
-const seedArea =
-  document.getElementById('seedArea');
+const btnSoil = document.getElementById('btnSoil');
+const btnSeed = document.getElementById('btnSeed');
+const btnWater = document.getElementById('btnWater');
+const btnSun = document.getElementById('btnSun');
+const btnHarvest = document.getElementById('btnHarvest');
 
-const waterEffect =
-  document.getElementById('waterEffect');
+const seedOptions = document.getElementById('seedOptions');
+const seedChoices = document.querySelectorAll('.seed-choice');
 
-const plant =
-  document.getElementById('plant');
-
-const harvestResult =
-  document.getElementById('harvestResult');
-
-const harvestFruit =
-  document.getElementById('harvestFruit');
-
-const harvestText =
-  document.getElementById('harvestText');
-
-const closeHarvest =
-  document.getElementById('closeHarvest');
-
-const btnSoil =
-  document.getElementById('btnSoil');
-
-const btnSeed =
-  document.getElementById('btnSeed');
-
-const btnWater =
-  document.getElementById('btnWater');
-
-const btnHarvest =
-  document.getElementById('btnHarvest');
-
-const seedOptions =
-  document.getElementById('seedOptions');
-
-const seedChoices =
-  document.querySelectorAll('.seed-choice');
-
-let game4Step = 0;
-
-let score4 = 0;
-
-let selectedPlant = null;
-
-
-// =====================================
-// DATA TANAMAN
-// =====================================
-
+// PLANT DATA
 const plantData = {
-
-  stroberi: {
-
-    fruit: '🍓',
-
-    seed:
-      `
-      <div class="seed-row">
-        🫘 🫘 🫘
-      </div>
-      `,
-
-    sprout:
-      `
-      <div class="sprout-row">
-        🌱 🌱 🌱
-      </div>
-      `,
-
-    text:
-      'Selamat kamu berhasil memanen buah stroberi 🍓'
-
-  },
-
-  wortel: {
-
-    fruit: '🥕',
-
-    seed:
-      `
-      <div class="seed-row">
-        🫘 🫘 🫘
-      </div>
-      `,
-
-    sprout:
-      `
-      <div class="sprout-row">
-        🌱 🌱 🌱
-      </div>
-      `,
-
-    text:
-      'Selamat kamu berhasil memanen wortel 🥕'
-
-  },
-
-  jagung: {
-
-    fruit: '🌽',
-
-    seed:
-      `
-      <div class="seed-row">
-        🫘 🫘 🫘
-      </div>
-      `,
-
-    sprout:
-      `
-      <div class="sprout-row">
-        🌱 🌱 🌱
-      </div>
-      `,
-
-    text:
-      'Selamat kamu berhasil memanen jagung 🌽'
-
-  }
-
+  stroberi: { fruit: '🍓', name: 'Stroberi' },
+  wortel: { fruit: '🥕', name: 'Wortel' },
+  jagung: { fruit: '🌽', name: 'Jagung' }
 };
 
+// GAME STATE
+let game4Step = 0;
+let score4 = 0;
+let selectedPlant = null;
+let harvestCount = 0;
 
 // =====================================
-// PILIH TANAH
+// RESET GARDEN
+// =====================================
+
+function resetGarden() {
+  game4Step = 0;
+  score4 = 0;
+  selectedPlant = null;
+  harvestCount = 0;
+
+  soil.classList.add('hidden');
+  seedContainer.classList.add('hidden');
+  plantContainer.classList.add('hidden');
+  basket.classList.add('hidden');
+  seedOptions.classList.add('hidden');
+  sun.classList.add('hidden');
+  harvestFruits.innerHTML = '';
+
+  btnSoil.disabled = false;
+  btnSeed.disabled = true;
+  btnWater.disabled = true;
+  btnSun.disabled = true;
+  btnHarvest.disabled = true;
+
+  document.getElementById('feedback4').innerText = '';
+  document.getElementById('score4').innerText = '0';
+}
+
+// =====================================
+// PREPARE SOIL
 // =====================================
 
 btnSoil.addEventListener('click', () => {
-
   if (game4Step !== 0) {
-
     playWrong();
-
-    document.getElementById('feedback4')
-      .innerText =
-      '❌ Pilih sesuai urutan ya!';
-
+    document.getElementById('feedback4').innerText = '❌ Ikuti urutan: Tanah → Bibit → Siram → Panas → Panen!';
     return;
   }
 
   playCorrect();
 
   soil.classList.remove('hidden');
-
   btnSoil.disabled = true;
-
   btnSeed.disabled = false;
-
   game4Step = 1;
 
   score4 += 10;
-
   addScore(10);
-
-  document.getElementById('score4')
-    .innerText =
-    score4;
-
-  document.getElementById('feedback4')
-    .innerText =
-    '🪴 Tanah berhasil disiapkan!';
-
+  document.getElementById('score4').innerText = score4;
+  document.getElementById('feedback4').innerText = '🪴 Tanah berhasil disiapkan!';
 });
 
-
 // =====================================
-// BUKA POPUP PILIH BIBIT
+// OPEN SEED SELECTION
 // =====================================
 
 btnSeed.addEventListener('click', () => {
-
   if (game4Step !== 1) {
-
     playWrong();
-
-    document.getElementById('feedback4')
-      .innerText =
-      '❌ Siapkan tanah dulu!';
-
+    document.getElementById('feedback4').innerText = '❌ Siapkan tanah dulu!';
     return;
   }
 
   playCorrect();
-
-  // TAMPILKAN POPUP PILIHAN
   seedOptions.classList.remove('hidden');
-
-  document.getElementById('feedback4')
-    .innerText =
-    '🌱 Pilih bibit lalu tanam ke tanah!';
-
+  document.getElementById('feedback4').innerText = '🌱 Pilih bibit yang ingin ditanam!';
 });
 
-
 // =====================================
-// PILIH BIBIT
+// PLANT SEED
 // =====================================
 
 seedChoices.forEach((choice) => {
-
   choice.addEventListener('click', () => {
-
-    selectedPlant =
-      choice.dataset.plant;
-
-    const selectedData =
-      plantData[selectedPlant];
+    selectedPlant = choice.dataset.plant;
 
     playCorrect();
-
-    // TUTUP POPUP
     seedOptions.classList.add('hidden');
 
-    // MASUKKAN BIJI
-    seedArea.innerHTML =
-      selectedData.seed;
+    // SET FRUIT EMOJI BASED ON PLANT TYPE
+    plantFruit.textContent = plantData[selectedPlant].fruit;
 
-    seedArea.classList.remove('hidden');
-
-    // RESET ANIMASI
-    seedArea.style.animation =
-      'none';
-
-    seedArea.offsetHeight;
-
-    // ANIMASI TANAM
-    seedArea.style.animation =
-      'seedPlant .9s ease';
+    // SHOW SEED IN SOIL
+    seedContainer.classList.remove('hidden');
 
     btnSeed.disabled = true;
-
     btnWater.disabled = false;
-
     game4Step = 2;
 
     score4 += 10;
-
     addScore(10);
-
-    document.getElementById('score4')
-      .innerText =
-      score4;
-
-    document.getElementById('feedback4')
-      .innerText =
-      '🫘 Bibit berhasil ditanam di tanah!';
-
+    document.getElementById('score4').innerText = score4;
+    document.getElementById('feedback4').innerText = '🫘 Bibit berhasil ditanam di dalam tanah!';
   });
-
 });
 
-
 // =====================================
-// SIRAM TANAMAN
+// WATER PLANT
 // =====================================
 
 btnWater.addEventListener('click', () => {
-
   if (game4Step !== 2) {
-
     playWrong();
+    document.getElementById('feedback4').innerText = '❌ Tanam bibit dulu!';
+    return;
+  }
 
-    document.getElementById('feedback4')
-      .innerText =
-      '❌ Tanam bibit dulu!';
+  playCorrect();
+  btnWater.disabled = true;
+  document.getElementById('feedback4').innerText = '💧 Tanaman sedang disiram...';
 
+  // HIDE SEED, SHOW SPROUTING PLANT & WATER EFFECT
+  seedContainer.classList.add('hidden');
+  plantContainer.classList.remove('hidden');
+  waterEffect.classList.remove('hidden');
+
+  // REMOVE WATER EFFECT AFTER ANIMATION
+  setTimeout(() => {
+    waterEffect.classList.add('hidden');
+
+    btnSun.disabled = false;
+    game4Step = 3;
+
+    score4 += 10;
+    addScore(10);
+    document.getElementById('score4').innerText = score4;
+    document.getElementById('feedback4').innerText = '🌱 Tanaman menyerap air dan mulai tumbuh!';
+  }, 1500);
+});
+
+// =====================================
+// SUN EXPOSURE (GROWTH)
+// =====================================
+
+btnSun.addEventListener('click', () => {
+  if (game4Step !== 3) {
+    playWrong();
+    document.getElementById('feedback4').innerText = '❌ Siram tanaman dulu!';
     return;
   }
 
   playCorrect();
 
-  waterEffect.classList.remove('hidden');
+  // SHOW SUN AND TRIGGER GROWTH
+  sun.classList.remove('hidden');
+  sun.classList.add('active');
 
-  btnWater.disabled = true;
+  // APPLY STEM GROWTH ANIMATION
+  plantStem.style.animation = 'stemGrowMore 1.2s ease forwards';
 
-  document.getElementById('feedback4')
-    .innerText =
-    '💧 Tanaman sedang disiram...';
+  // MOVE FRUIT HIGHER AS PLANT GROWS
+  plantFruit.style.animation = 'none';
+  plantFruit.offsetHeight;
+  plantFruit.style.animation = 'fruitGrow .8s ease forwards';
 
+  btnSun.disabled = true;
+  document.getElementById('feedback4').innerText = '☀️ Sinar matahari membuat tanaman tumbuh lebih tinggi!';
 
+  // WAIT FOR GROWTH ANIMATION
   setTimeout(() => {
-
-    waterEffect.classList.add('hidden');
-
-    // TUNAS MUNCUL
-    seedArea.innerHTML =
-      plantData[selectedPlant].sprout;
-
-    seedArea.style.animation =
-      'none';
-
-    seedArea.offsetHeight;
-
-    seedArea.style.animation =
-      'growPlant .8s ease';
+    sun.classList.remove('active');
 
     btnHarvest.disabled = false;
-
-    game4Step = 3;
+    game4Step = 4;
 
     score4 += 10;
-
     addScore(10);
-
-    document.getElementById('score4')
-      .innerText =
-      score4;
-
-    document.getElementById('feedback4')
-      .innerText =
-      '🌱 Tanaman mulai tumbuh!';
-
-  }, 1800);
-
+    document.getElementById('score4').innerText = score4;
+    document.getElementById('feedback4').innerText = '🌿 Tanaman tumbuh dengan sempurna dan siap dipanen!';
+  }, 2200);
 });
 
-
 // =====================================
-// PANEN
+// HARVEST
 // =====================================
 
 btnHarvest.addEventListener('click', () => {
-
-  if (game4Step !== 3) {
-
+  if (game4Step !== 4) {
     playWrong();
-
-    document.getElementById('feedback4')
-      .innerText =
-      '❌ Siram tanaman dulu!';
-
+    document.getElementById('feedback4').innerText = '❌ Berikan sinar matahari dulu!';
     return;
   }
 
@@ -1021,90 +1037,37 @@ btnHarvest.addEventListener('click', () => {
   yeySound.currentTime = 0;
   yeySound.play();
 
+  // HIDE PLANT, SHOW BASKET
+  plantContainer.classList.add('hidden');
+  basket.classList.remove('hidden');
+
+  // ADD FRUIT TO BASKET
+  const fruitEmoji = plantData[selectedPlant].fruit;
+  const fruitDiv = document.createElement('div');
+  fruitDiv.className = 'harvest-fruit-item';
+  fruitDiv.textContent = fruitEmoji;
+  harvestFruits.appendChild(fruitDiv);
+
+  harvestCount++;
   btnHarvest.disabled = true;
 
-  const result =
-    plantData[selectedPlant];
-
-  // HILANGKAN TUNAS
-  seedArea.classList.add('hidden');
-
-  // TAMPILKAN HASIL PANEN
-  plant.classList.remove('hidden');
-
-  plant.innerHTML =
-    result.fruit;
-
-  // RESET ANIMASI
-  plant.style.animation =
-    'none';
-
-  plant.offsetHeight;
-
-  plant.style.animation =
-    'growPlant .7s ease';
-
-  // POPUP HASIL
-  harvestFruit.innerHTML =
-    result.fruit;
-
-  harvestText.innerHTML =
-    result.text;
-
-  harvestResult.classList.remove('hidden');
-
   score4 += 10;
-
   addScore(10);
+  document.getElementById('score4').innerText = score4;
+  document.getElementById('feedback4').innerText = '🧺 Buah berhasil dipanen ke dalam keranjang!';
 
-  document.getElementById('score4')
-    .innerText =
-    score4;
-
-  document.getElementById('feedback4')
-    .innerText =
-    '🏆 Hebat! Kamu berhasil panen!';
-
-
+  // GAME COMPLETE
   setTimeout(() => {
-
     let stars = '⭐';
 
     if (totalScore >= 80) {
-
       stars = '⭐⭐⭐';
-
-    }
-
-    else if (totalScore >= 50) {
-
+    } else if (totalScore >= 50) {
       stars = '⭐⭐';
-
     }
 
-    document.querySelector('.stars')
-      .innerText =
-      stars;
-
-    document.getElementById('finalScore')
-      .innerText =
-      totalScore;
-
-    document.querySelector('.finish-box')
-      .style.display =
-      'block';
-
+    document.querySelector('.stars').innerText = stars;
+    document.getElementById('finalScore').innerText = totalScore;
+    document.querySelector('.finish-box').style.display = 'block';
   }, 1200);
-
-});
-
-
-// =====================================
-// TUTUP POPUP PANEN
-// =====================================
-
-closeHarvest.addEventListener('click', () => {
-
-  harvestResult.classList.add('hidden');
-
 });
