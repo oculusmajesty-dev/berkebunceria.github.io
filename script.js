@@ -21,7 +21,7 @@ const wrongSound =
 const yeySound =
   document.getElementById('yeySound');
 
-bgMusic.volume = 0.3;
+bgMusic.volume = 0.15;
 
 
 function startGame() {
@@ -56,6 +56,123 @@ function showPage(pageId) {
 
   document.getElementById(pageId)
     .classList.add('active');
+
+  updatePageVoice(pageId);
+}
+
+function getSpeechVoice() {
+  if (!window.speechSynthesis) return null;
+  const voices = window.speechSynthesis.getVoices();
+  if (!voices.length) return null;
+
+  const exactIdVoices = voices.filter((voice) =>
+    voice.lang && voice.lang.toLowerCase() === 'id-id'
+  );
+  if (exactIdVoices.length) return exactIdVoices[0];
+
+  const idVoices = voices.filter((voice) => {
+    const lang = voice.lang ? voice.lang.toLowerCase() : '';
+    const name = voice.name ? voice.name.toLowerCase() : '';
+    return lang.includes('id') || name.includes('id');
+  });
+  if (idVoices.length) return idVoices[0];
+
+  return voices[0];
+}
+
+function speakText(text) {
+  if (!window.speechSynthesis) return;
+
+  // KECILKAN BACKGROUND MUSIC
+  bgMusic.volume = 0.03;
+
+  window.speechSynthesis.cancel();
+
+  const utterance = new SpeechSynthesisUtterance(text);
+
+  utterance.lang = 'id-ID';
+  utterance.rate = 0.9;
+  utterance.pitch = 1;
+  utterance.volume = 1;
+
+  utterance.voice = getSpeechVoice();
+
+  // SETELAH SUARA SELESAI, BALIKKAN VOLUME MUSIC
+  utterance.onend = () => {
+    bgMusic.volume = 0.15;
+  };
+
+  window.speechSynthesis.speak(utterance);
+}
+
+if (window.speechSynthesis) {
+  window.speechSynthesis.onvoiceschanged = () => {
+    window.speechSynthesis.getVoices();
+  };
+}
+
+function updatePageVoice(pageId) {
+  if (pageId === 'game1') {
+    if (colorQuestions[currentColorQuestion]) {
+      setGame1Instruction(colorQuestions[currentColorQuestion]);
+      speakText(document.getElementById('game1Instruction').innerText);
+    }
+  } else if (pageId === 'game2') {
+    setGame2Instruction();
+    speakText(document.getElementById('game2Instruction').innerText);
+  } else if (pageId === 'game3') {
+    setGame3Instruction();
+    speakText(document.getElementById('game3Instruction').innerText);
+  } else if (pageId === 'game4') {
+    setGame4Instruction();
+    speakText(document.getElementById('game4Instruction').innerText);
+  }
+}
+
+function setGame1Instruction(data) {
+  const subject = data.name || 'objek';
+  const choices = data.choices.join(', ');
+  const instruction = `Lihat gambar ini. Ya, ini adalah ${subject}. Apa warna ${subject}? Pilihan: ${choices}.`;
+  document.getElementById('game1Instruction').innerText = instruction;
+}
+
+function setGame2Instruction() {
+  const instruction = 'Lihat gambar di kiri dan bayangan di kanan. Klik titik kiri lalu titik kanan yang cocok untuk menemukan pasangan yang benar.';
+  document.getElementById('game2Instruction').innerText = instruction;
+}
+
+function setGame3Instruction() {
+  const instruction = 'Buka kotak dan cari dua gambar yang sama. Jika cocok, kotak akan tetap terbuka. Ayo cari semua pasangannya!';
+  document.getElementById('game3Instruction').innerText = instruction;
+}
+
+function setGame4Instruction() {
+  let instruction = 'Ikuti urutan berkebun: siapkan tanah, pilih bibit, siram, panaskan, lalu panen.';
+  if (game4Step === 1) {
+    instruction = 'Tanah sudah siap. Sekarang pilih bibit yang ingin kamu tanam.';
+  } else if (game4Step === 2) {
+    instruction = 'Bibit sudah ditanam. Saatnya siram tanaman agar tumbuh.';
+  } else if (game4Step === 3) {
+    instruction = 'Tanaman sudah disiram. Berikan sinar matahari agar tumbuh lebih besar.';
+  } else if (game4Step === 4) {
+    instruction = 'Tanaman sudah matang! Klik panen untuk mengambil hasilnya.';
+  }
+  document.getElementById('game4Instruction').innerText = instruction;
+}
+
+function replayInstruction(pageId) {
+  if (window.speechSynthesis.speaking) {
+    window.speechSynthesis.cancel();
+  }
+  if (pageId === 'game1') {
+    speakText(document.getElementById('game1Instruction').innerText);
+  } else if (pageId === 'game2') {
+    speakText(document.getElementById('game2Instruction').innerText);
+  } else if (pageId === 'game3') {
+    speakText(document.getElementById('game3Instruction').innerText);
+  } else if (pageId === 'game4') {
+    speakText(document.getElementById('game4Instruction').innerText);
+  }
 }
 
 
@@ -64,16 +181,14 @@ function showPage(pageId) {
 // =====================================
 
 function playCorrect() {
-
   correctSound.currentTime = 0;
-
+  correctSound.volume = 0.3;
   correctSound.play();
 }
 
 function playWrong() {
-
   wrongSound.currentTime = 0;
-
+  wrongSound.volume = 0.2;
   wrongSound.play();
 }
 
@@ -109,6 +224,9 @@ const colorQuestions = [
     question:
       'Apa warna apel?',
 
+    name:
+      'apel',
+
     answer:
       'Merah',
 
@@ -126,6 +244,9 @@ const colorQuestions = [
     question:
       'Apa warna stroberi?',
 
+    name:
+      'stroberi',
+
     answer:
       'Merah',
 
@@ -142,6 +263,9 @@ const colorQuestions = [
 
     question:
       'Apa warna wortel?',
+
+    name:
+      'wortel',
 
     answer:
       'Oranye',
@@ -164,6 +288,9 @@ const colorQuestions = [
     question:
       'Apa warna terong?',
 
+    name:
+      'terong',
+
     answer:
       'Ungu',
 
@@ -181,6 +308,9 @@ const colorQuestions = [
     question:
       'Apa warna bunga matahari?',
 
+    name:
+      'bunga matahari',
+
     answer:
       'Kuning',
 
@@ -197,6 +327,9 @@ const colorQuestions = [
 
     question:
       'Apa warna brokoli?',
+
+    name:
+      'brokoli',
 
     answer:
       'Hijau',
@@ -273,9 +406,15 @@ function loadColorQuestion() {
     .innerText =
     data.question;
 
+  // INSTRUCTION TEXT
+  setGame1Instruction(data);
+
   // CHOICES
   renderChoices(data);
 
+  if (document.getElementById('game1').classList.contains('active')) {
+    speakText(document.getElementById('game1Instruction').innerText);
+  }
 }
 
 
@@ -333,9 +472,11 @@ function checkAnswer(choice, answer){
 
     playCorrect();
 
+    const correctText = `✅ Benar! ${answer} adalah warna yang tepat.`;
     document.getElementById('feedback1')
       .innerText =
-      '✅ Benar! Hebat!';
+      correctText;
+    speakText(`Benar! ${answer} adalah warna yang tepat.`);
 
     score1 += 10;
 
@@ -345,29 +486,16 @@ function checkAnswer(choice, answer){
       .innerText =
       score1;
 
-    currentColorQuestion++;
-
     setTimeout(() => {
 
       document.getElementById('feedback1')
         .innerText = '';
 
-      // NEXT QUESTION
-      if(
-        currentColorQuestion <
-        colorQuestions.length
-      ){
-
-        // INI YANG KURANG
+      if (currentColorQuestion < colorQuestions.length - 1) {
+        currentColorQuestion++;
         loadColorQuestion();
-
-      }
-
-      // FINISH
-      else{
-
+      } else {
         showPage('game2');
-
       }
 
     }, 1200);
@@ -379,9 +507,11 @@ function checkAnswer(choice, answer){
 
     playWrong();
 
+    const wrongText = '❌ Oops, coba lagi!';
     document.getElementById('feedback1')
       .innerText =
-      '❌ Salah, coba lagi!';
+      wrongText;
+    speakText('Oops, coba lagi!');
 
   }
 
@@ -833,6 +963,11 @@ const btnWater = document.getElementById('btnWater');
 const btnSun = document.getElementById('btnSun');
 const btnHarvest = document.getElementById('btnHarvest');
 
+const finishTitle = document.getElementById('finishTitle');
+const finishText = document.getElementById('finishText');
+const harvestImage = document.getElementById('harvestImage');
+const saveHarvest = document.getElementById('saveHarvest');
+
 const seedOptions = document.getElementById('seedOptions');
 const seedChoices = document.querySelectorAll('.seed-choice');
 
@@ -862,6 +997,9 @@ function resetGarden() {
   soil.classList.add('hidden');
   seedContainer.classList.add('hidden');
   plantContainer.classList.add('hidden');
+  plantContainer.classList.remove('enlarged');
+  plantStem.classList.remove('grown');
+  plantFruit.classList.remove('grown');
   basket.classList.add('hidden');
   seedOptions.classList.add('hidden');
   sun.classList.add('hidden');
@@ -899,6 +1037,8 @@ btnSoil.addEventListener('click', () => {
   addScore(10);
   document.getElementById('score4').innerText = score4;
   document.getElementById('feedback4').innerText = '🪴 Tanah berhasil disiapkan!';
+  setGame4Instruction();
+  speakText('Tanah berhasil disiapkan. Sekarang pilih bibit yang ingin kamu tanam.');
 });
 
 // =====================================
@@ -942,6 +1082,8 @@ seedChoices.forEach((choice) => {
     addScore(10);
     document.getElementById('score4').innerText = score4;
     document.getElementById('feedback4').innerText = '🫘 Bibit berhasil ditanam di dalam tanah!';
+    setGame4Instruction();
+    speakText('Bibit telah ditanam. Sekarang sirami tanaman agar tumbuh.');
   });
 });
 
@@ -963,6 +1105,7 @@ btnWater.addEventListener('click', () => {
   // HIDE SEED, SHOW SPROUTING PLANT & WATER EFFECT
   seedContainer.classList.add('hidden');
   plantContainer.classList.remove('hidden');
+  plantContainer.classList.add('enlarged');
   waterEffect.classList.remove('hidden');
 
   // REMOVE WATER EFFECT AFTER ANIMATION
@@ -976,6 +1119,8 @@ btnWater.addEventListener('click', () => {
     addScore(10);
     document.getElementById('score4').innerText = score4;
     document.getElementById('feedback4').innerText = '🌱 Tanaman menyerap air dan mulai tumbuh!';
+    setGame4Instruction();
+    speakText('Tanaman telah disiram dan mulai tumbuh. Sekarang berikan sinar matahari.');
   }, 1500);
 });
 
@@ -1003,6 +1148,8 @@ btnSun.addEventListener('click', () => {
   plantFruit.style.animation = 'none';
   plantFruit.offsetHeight;
   plantFruit.style.animation = 'fruitGrow .8s ease forwards';
+  plantStem.classList.add('grown');
+  plantFruit.classList.add('grown');
 
   btnSun.disabled = true;
   document.getElementById('feedback4').innerText = '☀️ Sinar matahari membuat tanaman tumbuh lebih tinggi!';
@@ -1018,6 +1165,8 @@ btnSun.addEventListener('click', () => {
     addScore(10);
     document.getElementById('score4').innerText = score4;
     document.getElementById('feedback4').innerText = '🌿 Tanaman tumbuh dengan sempurna dan siap dipanen!';
+    setGame4Instruction();
+    speakText('Tanaman sudah tumbuh lebih besar dan siap untuk dipanen. Klik tombol panen!');
   }, 2200);
 });
 
@@ -1058,8 +1207,14 @@ btnHarvest.addEventListener('click', () => {
 
   // GAME COMPLETE
   setTimeout(() => {
-    let stars = '⭐';
+    const plantName = selectedPlant ? plantData[selectedPlant].name : 'tanaman';
+    const fruitEmoji = selectedPlant ? plantData[selectedPlant].fruit : '🌿';
 
+    finishTitle.innerText = `🎉 Selamat! Kamu berhasil memanen ${plantName}!`;
+    harvestImage.textContent = fruitEmoji;
+    finishText.innerText = `Kamu merawat ${plantName} dengan baik dan mendapatkan hasil panen yang segar.`;
+
+    let stars = '⭐';
     if (totalScore >= 80) {
       stars = '⭐⭐⭐';
     } else if (totalScore >= 50) {
@@ -1069,5 +1224,84 @@ btnHarvest.addEventListener('click', () => {
     document.querySelector('.stars').innerText = stars;
     document.getElementById('finalScore').innerText = totalScore;
     document.querySelector('.finish-box').style.display = 'block';
+    speakText(`Selamat! Kamu berhasil memanen ${plantName}.`);
   }, 1200);
+});
+
+saveHarvest.addEventListener('click', () => {
+  saveHarvest.disabled = true;
+  saveHarvest.innerText = 'Berhasil Tersimpan ✅';
+  finishText.innerText =
+    'Hasil panenmu sudah berhasil disimpan!';
+
+  finishText.classList.add('saved');
+  speakText(
+    'Hasil panenmu sudah berhasil disimpan.'
+  );
+  setTimeout(() => {
+
+    // TUTUP POPUP
+    document.querySelector('.finish-box')
+      .style.display = 'none';
+
+    // TAMPILKAN HASIL AKHIR
+    const finalResultBox =
+      document.getElementById('finalResultBox');
+    finalResultBox.classList.remove('hidden');
+    document.getElementById('finalTotalScore')
+      .innerText = totalScore;
+  }, 1800);
+});
+
+const navNextButtons = document.querySelectorAll('.nav-next');
+const navBackButtons = document.querySelectorAll('.nav-back');
+
+navNextButtons.forEach((button) => {
+  button.addEventListener('click', () => {
+    const page = button.closest('.page');
+    if (!page) return;
+    const currentId = page.id;
+    if (currentId === 'game1') {
+      if (currentColorQuestion < colorQuestions.length - 1) {
+        currentColorQuestion++;
+        loadColorQuestion();
+      } else {
+        showPage('game2');
+      }
+    } else if (currentId === 'game2') showPage('game3');
+    else if (currentId === 'game3') showPage('game4');
+    else if (currentId === 'game4') showPage('game1');
+  });
+});
+
+navBackButtons.forEach((button) => {
+  button.addEventListener('click', () => {
+    const page = button.closest('.page');
+    if (!page) return;
+    const currentId = page.id;
+    if (currentId === 'game1') {
+      if (currentColorQuestion > 0) {
+        currentColorQuestion--;
+        loadColorQuestion();
+      } else {
+        showPage('home');
+      }
+    } else if (currentId === 'game2') showPage('game1');
+    else if (currentId === 'game3') showPage('game2');
+    else if (currentId === 'game4') showPage('game3');
+  });
+});
+
+const replayButtons = [
+  { id: 'replayGame1', page: 'game1' },
+  { id: 'replayGame2', page: 'game2' },
+  { id: 'replayGame3', page: 'game3' },
+  { id: 'replayGame4', page: 'game4' }
+];
+
+replayButtons.forEach(({ id, page }) => {
+  const btn = document.getElementById(id);
+  if (btn) {
+    btn.addEventListener('click', () => replayInstruction(page));
+  }
 });

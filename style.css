@@ -27,8 +27,10 @@ body{
 /* ================================= */
 
 .page{
+  position:relative;
   display:none;
   animation:fade .5s ease;
+  padding-bottom:120px;
 }
 
 .page.active{
@@ -214,6 +216,140 @@ h2{
   text-align:center;
   font-size:28px;
   margin-bottom:30px;
+}
+
+.instruction-box{
+  max-width:900px;
+  margin:0 auto 25px;
+
+  background:transparent;
+  border:none;
+  box-shadow:none;
+
+  border-radius:25px;
+  padding:12px 20px;
+
+  display:flex;
+  justify-content:center;
+  margin-bottom:25px;
+}
+
+.game-instruction{
+  display:none;
+}
+
+.speaker-btn{
+  background:linear-gradient(to right,#66bb6a,#43a047);
+  color:white;
+  border-radius:22px;
+  padding:12px 22px;
+  font-size:18px;
+  box-shadow:0 6px 15px rgba(0,0,0,.12);
+}
+
+.finish-box{
+  display:none;
+  position:absolute;
+  top:12%;
+  left:50%;
+  transform:translateX(-50%);
+  width:calc(100% - 40px);
+  max-width:700px;
+  z-index:60;
+  background:white;
+  padding:40px;
+  border-radius:35px;
+  text-align:center;
+  box-shadow:0 18px 40px rgba(0,0,0,.25);
+}
+
+.finish-box .harvest-image-container{
+  display:flex;
+  justify-content:center;
+  margin:20px 0;
+}
+
+.finish-box .stars{
+  display:block;
+  font-size:48px;
+  margin:16px 0 8px;
+}
+
+.final-score{
+  font-size:24px;
+  margin-bottom:12px;
+  color:#2e7d32;
+  font-weight:700;
+}
+
+.finish-box .harvest-image{
+  width:140px;
+  height:140px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  margin:0 auto;
+  font-size:72px;
+  border:5px dashed #a5d6a7;
+  border-radius:50%;
+  background:linear-gradient(180deg, #e8f5e9 0%, #ffffff 100%);
+}
+
+.finish-text{
+  font-size:22px;
+  color:#2e7d32;
+  margin:18px auto 24px;
+  max-width:560px;
+}
+
+.save-btn{
+  background:linear-gradient(to right,#fdd835,#fb8c00);
+  color:#333;
+  border:none;
+  border-radius:24px;
+  padding:14px 28px;
+  font-size:18px;
+  font-weight:700;
+  box-shadow:0 8px 18px rgba(251,140,0,.25);
+  margin-bottom:18px;
+  cursor:pointer;
+}
+
+.save-btn:disabled{
+  opacity:.7;
+  cursor:default;
+}
+
+.finish-text.saved{
+  font-weight:700;
+}
+
+.page-nav{
+  position:absolute;
+  left:50%;
+  transform:translateX(-50%);
+  bottom:20px;
+  width:900px;
+  max-width:90%;
+  display:flex;
+  justify-content:space-between;
+  gap:20px;
+}
+
+.nav-btn{
+  flex:1;
+  max-width:220px;
+  margin:auto;
+  background:linear-gradient(to right,#43a047,#66bb6a);
+  color:white;
+  border-radius:18px;
+  padding:14px 20px;
+  font-size:18px;
+  font-weight:700;
+}
+
+.nav-btn:hover{
+  transform:scale(1.04);
 }
 
 /* ================================= */
@@ -752,8 +888,8 @@ h2{
   bottom:30px;
   left:50%;
   transform:translateX(-50%);
-  width:100px;
-  height:250px;
+  width:120px;
+  height:300px;
   z-index:4;
   display:flex;
   flex-direction:column;
@@ -761,11 +897,16 @@ h2{
   justify-content:flex-end;
 }
 
+.plant-container.enlarged{
+  width:160px;
+  height:360px;
+}
+
 .plant-root{
   position:absolute;
   bottom:0;
-  width:30px;
-  height:15px;
+  width:34px;
+  height:18px;
   background:#4a3219;
   border-radius:50%;
   z-index:1;
@@ -775,7 +916,7 @@ h2{
 .plant-stem{
   position:absolute;
   bottom:12px;
-  width:4px;
+  width:6px;
   height:0;
   background:linear-gradient(to top, #2e7d32, #4caf50);
   transform-origin:bottom center;
@@ -783,12 +924,16 @@ h2{
   z-index:2;
 }
 
+.plant-stem.grown{
+  height:160px;
+}
+
 @keyframes stemGrow{
   from{
     height:0;
   }
   to{
-    height:120px;
+    height:140px;
   }
 }
 
@@ -849,14 +994,19 @@ h2{
 
 .plant-fruit{
   position:absolute;
-  top:60px;
+  top:175px;
   left:50%;
   transform:translateX(-90%);
-  font-size:45px;
+  font-size:55px;
   z-index:5;
   animation:fruitGrow .7s ease 1.2s forwards;
   opacity:0;
-  filter:drop-shadow(0 2px 4px rgba(0,0,0,.1));
+  filter:drop-shadow(0 4px 6px rgba(0,0,0,.15));
+}
+
+.plant-fruit.grown{
+  font-size:75px;
+  top:112px;
 }
 
 @keyframes fruitGrow{
@@ -876,20 +1026,20 @@ h2{
 
 .water-effect{
   position:absolute;
-  top:-80px;
+  top:-90px;
   left:50%;
   transform:translateX(-50%);
-  width:80px;
-  height:100px;
+  width:90px;
+  height:120px;
   z-index:20;
   display:flex;
   flex-direction:column;
   align-items:center;
-  gap:8px;
+  gap:10px;
 }
 
 .water-drop{
-  font-size:32px;
+  font-size:36px;
   animation:waterFall .8s ease infinite;
 }
 
@@ -921,30 +1071,30 @@ h2{
 
 .basket{
   position:absolute;
-  bottom:50px;
-  right:80px;
+  bottom:45px;
+  right:70px;
   z-index:6;
   animation:basketAppear .6s ease;
 }
 
 .basket-body{
-  font-size:70px;
+  font-size:90px;
   display:flex;
   align-items:center;
   justify-content:center;
-  width:100px;
-  height:80px;
+  width:120px;
+  height:100px;
 }
 
 .harvest-fruits{
   position:absolute;
-  bottom:15px;
+  bottom:18px;
   left:50%;
   transform:translateX(-50%);
   display:flex;
-  gap:5px;
-  font-size:32px;
-  min-height:40px;
+  gap:8px;
+  font-size:38px;
+  min-height:48px;
   justify-content:center;
 }
 
@@ -1147,27 +1297,13 @@ h2{
 }
 
 /* ================================= */
-/* FINISH BOX */
-/* ================================= */
-
-.finish-box{
-  display:none;
-  margin-top:40px;
-  background:white;
-  padding:40px;
-  border-radius:35px;
-  text-align:center;
-  box-shadow:0 10px 25px rgba(0,0,0,.12);
-}
-
-/* ================================= */
 /* RESPONSIVE */
 /* ================================= */
 
 @media(max-width:900px){
 
   .garden-area{
-    height:500px;
+    height:520px;
   }
 
   .garden-controls{
@@ -1181,15 +1317,16 @@ h2{
   }
 
   .plant-container{
-    height:160px;
+    width:110px;
+    height:180px;
   }
 
   .plant-stem{
-    height:100px;
+    height:95px;
   }
 
   .plant-fruit{
-    font-size:40px;
+    font-size:42px;
   }
 
   .basket{
@@ -1233,6 +1370,7 @@ h2{
   }
 
   .plant-container{
+    width:100px;
     height:140px;
   }
 
@@ -1282,5 +1420,21 @@ h2{
   to{
     height:150px;
   }
+}
+
+.final-result-box{
+  margin-top:40px;
+  background:white;
+  border-radius:40px;
+  padding:50px 30px;
+  text-align:center;
+  box-shadow:0 15px 35px rgba(0,0,0,.15);
+}
+
+.final-total-score{
+  font-size:32px;
+  margin:20px 0 30px;
+  color:#2e7d32;
+  font-weight:700;
 }
 
